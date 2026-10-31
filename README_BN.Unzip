@@ -1,0 +1,20 @@
+Smart Recharge BD — প্রাথমিক ওয়েব ডেমো
+
+গুরুত্বপূর্ণ:
+এই সাইটটি বর্তমানে শুধু ডেমো। এটি বাস্তবে মোবাইল রিচার্জ করে না, bKash/Nagad পেমেন্ট গ্রহণ বা যাচাই করে না, এবং অর্ডারগুলো শুধু একই ব্রাউজারের Local Storage-এ থাকে। অন্য গ্রাহক বা অন্য ফোন থেকে অর্ডার দেখা যাবে না।
+
+GitHub Pages দিয়ে বিনামূল্যে অনলাইনে প্রকাশের ধাপ (মোবাইল থেকেও করা যায়):
+১) https://github.com এ গিয়ে নিজের অ্যাকাউন্ট খুলুন/লগইন করুন।
+২) New repository তৈরি করুন। নাম দিন smart-recharge-bd এবং Public নির্বাচন করুন।
+৩) Add file → Upload files চাপুন। এই ZIP-এর index.html ফাইলটি আপলোড করুন (ZIP নয়, ZIP খুলে index.html আপলোড করতে হবে)।
+৪) Commit changes চাপুন।
+৫) Repository → Settings → Pages এ যান। Build and deployment অংশে Deploy from a branch নির্বাচন করুন। Branch: main এবং folder: /(root) দিয়ে Save করুন।
+৬) কিছুক্ষণ পর Pages অংশে প্রকাশিত ওয়েবসাইটের ঠিকানা দেখাবে।
+
+লাইভ ব্যবসা চালুর আগে প্রয়োজন:
+- অর্ডার সবার জন্য সংরক্ষণ করতে backend/database
+- অনুমোদিত রিচার্জ রিসেলার/ডিস্ট্রিবিউটর বা API
+- bKash/Nagad-এর অফিসিয়াল merchant/payment gateway ব্যবস্থা
+- নিরাপদ admin login, সার্ভার-সাইড payment verification এবং privacy/terms
+
+কোনো অবস্থাতেই bKash/Nagad PIN, OTP বা পাসওয়ার্ড কাউকে দেবেন না।

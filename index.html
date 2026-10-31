@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1457c5">
+<title>Smart Recharge BD</title>
+<style>
+:root{--blue:#1457c5;--blue2:#287ee8;--bg:#f3f6fb;--ink:#172033;--muted:#64748b;--line:#dbe3ef}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#103d91,#2784e8);color:#fff;padding:24px 16px;text-align:center}
+header h1{margin:0 0 7px;font-size:27px}header p{margin:0;opacity:.95}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+nav button{width:auto;margin:0;padding:9px 13px;background:#ffffff20;border:1px solid #ffffff55;font-size:14px}
+main{max-width:820px;margin:20px auto;padding:0 13px}
+.card{background:#fff;border-radius:15px;padding:18px;margin-bottom:15px;box-shadow:0 5px 20px #15264a10}
+h2{font-size:19px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
+input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:#fff}
+button{cursor:pointer;border:0;border-radius:10px;padding:13px;background:var(--blue);color:white;font-size:16px;font-weight:700;margin-top:16px;width:100%}
+button.secondary{background:#e8f1ff;color:#1246a5}button.danger{background:#b42318}
+.small{font-size:13px;color:var(--muted);line-height:1.6}.badge{display:inline-block;background:#e8f1ff;color:#1246a5;padding:6px 10px;border-radius:20px;font-size:13px;margin:3px}
+.notice{background:#fff8e6;border:1px solid #f3d48b;padding:12px;border-radius:10px;font-size:13px;line-height:1.6}
+#message{display:none;padding:12px;background:#ecfdf3;border:1px solid #abefc6;border-radius:9px;white-space:pre-wrap;line-height:1.6}
+.order{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}
+.order strong{display:block;margin-bottom:5px}.status{font-size:12px;color:#8a4b08;background:#fff4d6;border-radius:20px;padding:4px 8px;display:inline-block}
+.hidden{display:none}.tabs{display:flex;gap:8px}.tabs button{margin:0}
+footer{text-align:center;color:#667085;padding:8px 15px 28px;font-size:12px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}header h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header>
+ <h1>Smart Recharge BD</h1>
+ <p>সব অপারেটরের রিচার্জ ও প্যাক অর্ডার</p>
+ <div style="margin-top:10px"><span class="badge">GP</span><span class="badge">Robi</span><span class="badge">Airtel</span><span class="badge">Banglalink</span><span class="badge">Teletalk</span></div>
+ <nav>
+  <button onclick="showPage('buy')">অর্ডার করুন</button>
+  <button onclick="showPage('history')">আমার অর্ডার</button>
+  <button onclick="showPage('admin')">অ্যাডমিন (ডেমো)</button>
+ </nav>
+</header>
+<main>
+<section id="buy" class="page">
+ <div class="card">
+  <h2>রিচার্জ / প্যাক অর্ডার</h2>
+  <form id="orderForm">
+   <div class="grid">
+    <div><label for="phone">মোবাইল নম্বর</label><input id="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX" required></div>
+    <div><label for="operator">অপারেটর</label><select id="operator" required><option value="">নির্বাচন করুন</option><option>গ্রামীণফোন (GP)</option><option>রবি (Robi)</option><option>এয়ারটেল (Airtel)</option><option>বাংলালিংক (Banglalink)</option><option>টেলিটক (Teletalk)</option></select></div>
+   </div>
+   <label for="kind">সেবার ধরন</label><select id="kind" required><option value="">নির্বাচন করুন</option><option>সাধারণ রিচার্জ</option><option>ইন্টারনেট প্যাক</option><option>মিনিট প্যাক</option><option>ইন্টারনেট + মিনিট বান্ডেল</option></select>
+   <div class="grid">
+    <div><label for="pack">প্যাকের নাম / পরিমাণ</label><input id="pack" placeholder="যেমন: ২ জিবি / ১০০ টাকা" required></div>
+    <div><label for="amount">মোট টাকা (৳)</label><input id="amount" type="number" min="1" step="1" placeholder="টাকার পরিমাণ" required></div>
+   </div>
+   <label for="pay">পেমেন্ট পদ্ধতি</label><select id="pay" required><option value="">নির্বাচন করুন</option><option>বিকাশ (ম্যানুয়াল)</option><option>নগদ (ম্যানুয়াল)</option><option>ক্যাশ / সরাসরি</option></select>
+   <label for="trx">পেমেন্ট TrxID (পেমেন্ট করলে)</label><input id="trx" placeholder="পেমেন্টের TrxID; ক্যাশ হলে ফাঁকা রাখুন">
+   <button type="submit">অর্ডার জমা দিন</button>
+  </form>
+  <div id="message" style="margin-top:14px" aria-live="polite"></div>
+ </div>
+ <div class="card notice"><b>গুরুত্বপূর্ণ:</b> এটি এখনো ডেমো অর্ডার ব্যবস্থা। এখানে টাকা নেওয়া হয় না এবং কোনো সিমে স্বয়ংক্রিয় রিচার্জ হয় না। লাইভ করার আগে অনুমোদিত রিচার্জ API/রিসেলার অ্যাকাউন্ট এবং বৈধ মার্চেন্ট পেমেন্ট ইন্টিগ্রেশন লাগবে।</div>
+</section>
+
+<section id="history" class="page hidden">
+ <div class="card"><h2>আমার অর্ডার</h2><p class="small">এই ডেমোতে অর্ডারগুলো শুধু এই ব্রাউজার/মোবাইলেই সংরক্ষিত থাকে। অন্য ডিভাইসে দেখা যাবে না।</p><div id="historyList"></div><button class="secondary" onclick="renderOrders()">রিফ্রেশ</button></div>
+</section>
+
+<section id="admin" class="page hidden">
+ <div class="card">
+  <h2>অ্যাডমিন ড্যাশবোর্ড (শুধু ডেমো)</h2>
+  <p class="small">এখানে এই ডিভাইসে তৈরি অর্ডার দেখা ও ডেমো স্ট্যাটাস বদলানো যায়। এটি নিরাপদ অনলাইন অ্যাডমিন প্যানেল নয়; লাইভ ব্যবসায় সার্ভার-ভিত্তিক লগইন ও ডাটাবেস প্রয়োজন।</p>
+  <div id="adminList"></div>
+  <button class="danger" onclick="clearOrders()">এই ডিভাইসের ডেমো অর্ডার মুছুন</button>
+ </div>
+</section>
+</main>
+<footer>© 2026 Smart Recharge BD · প্রাথমিক ডেমো</footer>
+<script>
+const KEY='smartRechargeOrdersV1';
+function getOrders(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function saveOrders(a){localStorage.setItem(KEY,JSON.stringify(a))}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id!=='buy')renderOrders()}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.getElementById('orderForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const phone=document.getElementById('phone').value.trim();
+ if(!/^01[3-9]\d{8}$/.test(phone)){alert('সঠিক ১১ সংখ্যার বাংলাদেশি মোবাইল নম্বর দিন।');return}
+ const amount=Number(document.getElementById('amount').value);
+ if(!Number.isFinite(amount)||amount<=0){alert('সঠিক টাকার পরিমাণ দিন।');return}
+ const order={id:'SR'+Date.now().toString().slice(-8),phone,operator:document.getElementById('operator').value,kind:document.getElementById('kind').value,pack:document.getElementById('pack').value.trim(),amount,pay:document.getElementById('pay').value,trx:document.getElementById('trx').value.trim(),status:'অপেক্ষমাণ',created:new Date().toLocaleString('bn-BD')};
+ const orders=getOrders();orders.unshift(order);saveOrders(orders);
+ const box=document.getElementById('message');box.style.display='block';box.textContent='ডেমো অর্ডার তৈরি হয়েছে। অর্ডার নম্বর: '+order.id+'\\nএটি রিচার্জ বা পেমেন্ট সম্পন্ন করেনি। লাইভ সেবা চালু না হওয়া পর্যন্ত গ্রাহকের কাছ থেকে টাকা নেবেন না।';
+ e.target.reset();
+});
+function renderOrders(){
+ const orders=getOrders();
+ const render=(o,admin)=>`<div class="order"><strong>অর্ডার ${safe(o.id)} <span class="status">${safe(o.status)}</span></strong><div class="small">সময়: ${safe(o.created)}<br>নম্বর: ${safe(o.phone)}<br>অপারেটর: ${safe(o.operator)}<br>সেবা: ${safe(o.kind)} — ${safe(o.pack)}<br>টাকা: ৳${safe(o.amount)}<br>পেমেন্ট: ${safe(o.pay)}${o.trx?'<br>TrxID: '+safe(o.trx):''}</div>${admin?`<label>ডেমো স্ট্যাটাস</label><select onchange="setStatus('${safe(o.id)}',this.value)"><option ${o.status==='অপেক্ষমাণ'?'selected':''}>অপেক্ষমাণ</option><option ${o.status==='যাচাইাধীন'?'selected':''}>যাচাইাধীন</option><option ${o.status==='সম্পন্ন (শুধু ডেমো)'?'selected':''}>সম্পন্ন (শুধু ডেমো)</option><option ${o.status==='বাতিল'?'selected':''}>বাতিল</option></select>`:''}</div>`;
+ document.getElementById('historyList').innerHTML=orders.length?orders.map(o=>render(o,false)).join(''):'<p class="small">এখনো কোনো অর্ডার নেই।</p>';
+ document.getElementById('adminList').innerHTML=orders.length?orders.map(o=>render(o,true)).join(''):'<p class="small">এখনো কোনো অর্ডার নেই।</p>';
+}
+function setStatus(id,status){const a=getOrders();const i=a.findIndex(o=>o.id===id);if(i>=0){a[i].status=status;saveOrders(a);renderOrders()}}
+function clearOrders(){if(confirm('এই ডিভাইসের সব ডেমো অর্ডার মুছে ফেলবেন?')){saveOrders([]);renderOrders()}}
+renderOrders();
+</script>
+</body></html>
